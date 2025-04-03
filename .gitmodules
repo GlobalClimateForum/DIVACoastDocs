@@ -1,0 +1,3 @@
+[submodule "DIVACoast.jl"]
+	path = DIVACoast.jl
+	url = https://github.com/GlobalClimateForum/DIVACoast.jl.git
