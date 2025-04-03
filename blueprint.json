@@ -1,0 +1,7 @@
+{
+    "docs":  {
+        "target_id" : "docs",
+        "type" : "html_embed",
+        "content" : ["./DIVACoast.jl/docs/build/index.html"]
+    }
+}

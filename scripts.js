@@ -16,7 +16,7 @@ function initEmbeds() {
 // Execute when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     slider(); // Creates and updates the section slider
-    controlMap();
+    // controlMap();
 });
 
 // Section slider
@@ -68,11 +68,7 @@ function buildBlueprint() {
             let content_target = bp[section].target_id
 
             if (content.length > 0) {
-                if (content_type == "ipynb") {
-                    content.forEach(nb_url => {
-                        addNBTemplate(nb_url, content_target);
-                    });
-                } else if (content_type == "html_embed") {
+                if (content_type == "html_embed") {
                     content.forEach(html_path => {
                         addHTMLEmbed(html_path, content_target);
                     });
@@ -81,31 +77,6 @@ function buildBlueprint() {
         })
     }).fail((jqXHR, textStatus, errorThrown) => {
         console.error('Failed to fetch Blueprint:', textStatus, errorThrown);
-    });
-}
-
-function addNBTemplate(nburl, targetID) {
-    return new Promise((resolve, reject) => {
-        const target = document.getElementById(targetID);
-        const htmlurl = 'https://nbviewer.org/urls/' + nburl;
-        // const  converted = '<div class="container" style="display:flex; height: 100%"><iframe class="nbembed" frameborder="0" src="' + htmlurl + '"></iframe></div>'
-        // target.insertAdjacentHTML("beforebegin", converted);
-        // target.innerHTML = '<iframe frameborder="0" src="' + htmlurl + '" id="embededHTML_nbviewer"></iframe>'
-        target.innerHTML = '<object type="text/html" data="' + htmlurl + '" id="embededHTML_nbviewer"></object>'
-
-        resolve();
-    }).then(() => {
-        const embededHTML = document.getElementById("embededHTML_nbviewer")
-        embededHTML.addEventListener("load", function () {
-            const embededHTMLDoc = embededHTML.contentDocument
-            if (embededHTMLDoc) {
-                const linkelemt = embededHTMLDoc.createElement('link');
-                linkelemt.rel = 'stylesheet';
-                linkelemt.type = 'text/css';
-                linkelemt.href = './styles/nbviewer_restyle.css';
-                embededHTMLDoc.head.appendChild(linkelemt);
-            }
-        });
     });
 }
 
@@ -123,7 +94,7 @@ function addHTMLEmbed(html_path, targetID) {
                 const linkelemt = embededHTMLDoc.createElement('link');
                 linkelemt.rel = 'stylesheet';
                 linkelemt.type = 'text/css';
-                linkelemt.href = '../../styles/documenter_restyle.css';
+                linkelemt.href = '../../../styles/documenter_restyle.css';
                 embededHTMLDoc.head.appendChild(linkelemt);
             }
         });
@@ -198,7 +169,7 @@ function exploreMap() {
         return hostname === 'localhost' || hostname === '127.0.0.1';
     }
 
-    let baththubdata = "./embeds/resmap/bathtub.geojson";
+    let baththubdata = "./data/bathtub.geojson";
 
     fetch(baththubdata)
         .then(response => response.json())
