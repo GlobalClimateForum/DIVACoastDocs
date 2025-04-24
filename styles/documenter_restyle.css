@@ -17,6 +17,17 @@
 #documenter .docs-sidebar {
     background-color: transparent;
     visibility: visible;
+
+    border: 0px solid transparent !important;
+    li {
+        font-family: 'Roboto', sans-serif;
+     
+    }
+}
+
+#documenter li .toplevel{
+    list-style-type: none !important;
+    background-color: red;
 }
 
 #documenter .docs-package-name {

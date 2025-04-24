@@ -46,16 +46,6 @@ function slider() {
     move_slider();
 }
 
-// Function for the explore Map 
-function controlMap() {
-    mapFPControl = document.getElementById("fpidInput");
-    mapFPControl.addEventListener("change", (event) => jumpToFloodplain(event));
-
-    function jumpToFloodplain(event) {
-        console.log(event.target.value)
-        map.panTo(new L.LatLng(0, 0));
-    }
-}
 
 // Embeds from blueprint
 function buildBlueprint() {
