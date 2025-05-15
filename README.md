@@ -48,3 +48,7 @@ After pushing the changes you made you can update the online version of the docu
 git submodule update --remote --merge
 ```
 The changes will appear after some time. Sometimes you need to `hard refresh` the page in you browser to see the changes!
+
+### Changes in documentation wrapper
+If you want to make changes in the documentation wrapper (everything around the documentation html) you can use a local development server by running the 
+`devServer.py` Python file and opening `localhost:8000` in your browser.
