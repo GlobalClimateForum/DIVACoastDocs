@@ -1,14 +1,16 @@
 :root {
 
-    --main-diva-color: #2b3d4f;
-    --main-diva-color2: #097374;
-    --main-diva-light: #A0C1D1;
-    --main-diva-xlight: #D6E4EB;
-    --main-diva-warn: #D16666;
+    --DeepSea: #2b3d4f;
+    --Ocean: #097374;
+    --Shark: #3F474F;
+    --Breeze: #A0C1D1;
+    --Buoy: #D16666;
 
-    --main-dark-color: #3F474F;
-    --main-dark_contrast: #5C6B73;
-
+    --Wave: #476685;
+    --Caribbean: #D9FBFC;
+    --Dolphin: #D9FBFC;
+    --Silt: #BBC2C9;
+    --Coral: #E3A1A1;
 
     /* --max-wrapper-width: 1800px; */
     --max-wrapper-width: 80vw;
@@ -24,6 +26,14 @@
     src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-Light.woff2");
 }
 
+
+html,
+body,
+* {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+
 body {
     font-family: Roboto, sans-serif;
     color: #444;
@@ -37,11 +47,11 @@ main {
     overflow-y: hidden;
     overflow-x: hidden;
     max-height: 100vh;
-    max-width: 100vw
+    max-width: 100vw;
 }
 
 header {
-    background-color: var(--main-diva-color);
+    background-color: var(--DeepSea);
     color: white;
     text-align: left;
     max-height: var(--header-height);
@@ -62,9 +72,19 @@ header {
     box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37);
 }
 
+.embed-fade {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.embed-fade.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .logoHeader {
     font-family: 'Roboto', sans-serif;
-    color: white;
+    color: var(--white);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -72,7 +92,7 @@ header {
 }
 
 .logoHeader img {
-    max-height: calc(var(--header-height)  - 40px);
+    max-height: calc(var(--header-height) - 40px);
 }
 
 
@@ -86,14 +106,14 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     padding: 0px 40px 0px 40px;
 }
 
 a {
     font-style: italic;
     text-decoration: none;
-    color: var(--main-diva-color)
+    color: var(--DeepSea)
 }
 
 
@@ -159,16 +179,13 @@ nav a {
     overflow: hidden;
 }
 
-#embededHTML_nbviewer {
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    overflow: hidden;
+.gist iframe.render-viewer {
+    width: 100% !important;
+    height: calc(100vh - var(--header-height)) !important;
 }
 
-
-
 footer {
-    background-color: var(--main-dark-color);
+    background-color: var(--Silt);
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -200,10 +217,6 @@ section {
     overflow: hidden;
 }
 
-footer {
-    background-color: var(--main-light_contrast);
-}
-
 
 /* Element depths */
 
@@ -226,7 +239,7 @@ footer {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--main-diva-color);
+    background: var(--DeepSea);
 }
 
 /* Handle on hover */
@@ -242,8 +255,8 @@ footer {
 }
 
 .cluster-icon {
-    /* background-color: var(--main-diva-warn); */
-    color: var(--main-diva-xlight);
+    /* background-color: var(--Buoy); */
+    color: var(--Dolphin);
     width: 30px;
     height: 30px;
     border-radius: 12px;
@@ -253,8 +266,52 @@ footer {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: 3px solid var(--main-diva-xlight);
-    background-color: var(--main-diva-color);
+    border: 3px solid var(--Dolphin);
+    background-color: var(--DeepSea);
+}
+
+.marker-icon {
+    background-color: var(--Buoy);
+    border-radius: 7.5px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.marker-icon:hover {
+    background-color: var(--Ocean);
+    transform: scale(1.2);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#exploremap_pane {
+    background-color: var(--Breeze);
+    width: 50%;
+    height: auto;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    z-index: 9999;
+    border-radius: 20px 20px 0 0;
+    color: var(--DeepSea);
+
+    input {
+        width: 150px;
+        height: 30px;
+        background-color: transparent;
+        border: 1px solid var(--DeepSea)
+    }
+
+    button {
+        background-color: var(--DeepSea);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 }
 
 
@@ -297,8 +354,8 @@ footer {
 
 .loader {
     z-index: 9997;
-    border: 16px solid var(--main-diva-xlight);
-    border-top: 16px solid var(--main-diva-color);
+    border: 16px solid var(--Dolphin);
+    border-top: 16px solid var(--DeepSea);
     border-radius: 50%;
     width: 150px;
     height: 150px;

@@ -1,13 +1,23 @@
 :root {
 
-    --main-diva-color: #2b3d4f;
-    --main-diva-color2: #097374;
-    --main-diva-light: #A0C1D1;
-    --main-diva-xlight: #D6E4EB;
-    --main-diva-warn: #D16666;
+    --DeepSea: #2b3d4f;
+    --Ocean: #097374;
+    --Shark: #3F474F;
+    --Breeze: #A0C1D1;
+    --Buoy: #D16666;
 
-    --main-dark-color: #3F474F;
-    --main-dark_contrast: #5C6B73;
+    --Wave: #476685;
+    --Caribbean: #D9FBFC;
+    --Dolphin: #D9FBFC;
+    --Silt: #BBC2C9;
+    --Coral: #E3A1A1;
+
+    --Shell: #fffcfa;
+
+}
+
+#documenter img {
+    max-width: 50%;
 }
 
 #documenter .docs-main {
@@ -19,15 +29,11 @@
     visibility: visible;
 
     border: 0px solid transparent !important;
+
     li {
         font-family: 'Roboto', sans-serif;
-     
-    }
-}
 
-#documenter li .toplevel{
-    list-style-type: none !important;
-    background-color: red;
+    }
 }
 
 #documenter .docs-package-name {
@@ -38,11 +44,7 @@
     padding: none;
 }
 
-#documenter .modal-background {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
+
 
 #documenter .docs-navbar-link {
     visibility: hidden;
@@ -52,26 +54,66 @@
     padding: none;
 }
 
+/* docstring restyle */
+
+
+#documenter article {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    border: none;
+}
+
+#documenter .docstring {
+    /* border-radius: 10px 10px 10px 10px; */
+    /* background-color: var(--Shell) ; */
+    border: 1px solid transparent !important;
+    color: var(--Shark);
+    /* border-bottom: 1px solid var(--DeepSea) !important; */
+
+}
+
 #documenter .docstring header {
-    background-color: var(--main-diva-xlight);
-    color: var(--main-dark-color);
+    font-size: larger;
+    background-color: transparent;
+    color: var(--Wave) !important;
+    border-radius: 10px 10px 0px 0px;
+    padding: none;
+    border: none;
+    outline: none;
+
+
+    /* -webkit-box-shadow: 0px 8px 12px 4px rgba(31, 38, 135, 0.1) !important;
+    box-shadow: 0px 8px 12px 4px rgba(31, 38, 135, 0.1) !important; */
+}
+
+#documenter .docstring-article-toggle-button {
+    color: var(--Wave) !important;
+}
+
+#documenter .docstring .docstring-binding code {
+    color: var(--Wave) !important;
+}
+
+#documenter pre code {
+    background-color: var(--Silt);
+    color: var(--Shark)
 }
 
 #documenter .content a code {
-    color: var(--main-dark-color);
     font-weight: bold;
 }
 
 #documenter .docstring a {
-    color: var(--main-dark-color);
+    color: var(--DeepSea);
 }
+
+/* modal restyle */
 
 .modal-background {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
-
 
 /* Scrollbar */
 ::-webkit-scrollbar {

@@ -12,29 +12,29 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="./styles/documenter_restyle.css">
-    
+
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <!-- Leaflet cdns -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    
+
     <!-- Main Script -->
-    <script defer  src="scripts.js"></script>
+    <script defer src="scripts.js"></script>
 </head>
 
 <body>
     <header>
         <div class="header_container header_wrapper">
             <div class="logoHeader">
-                <img src="./assets/DIVACoast_logo_new_white-03.svg">
+                <img src="./assets/DIVACoast_logo_white.svg">
                 <div style="min-width: 100%;">
                     <h1 style="margin:0px">DIVACoast.jl</h1>
                     <!-- <p style="margin: 0px; font-weight: light;">coastal impact and adaptation modelling</p> -->
@@ -42,8 +42,8 @@
             </div>
             <nav>
                 <a class="headerlink" data-index-number="0">Docs</a>
-                <!-- <a class="headerlink" data-index-number="1">Examples</a> -->
-                <a class="headerlink" data-index-number="1">Explore</a>
+                <a class="headerlink" data-index-number="1">Examples</a>
+                <a class="headerlink" data-index-number="2">Explore</a>
             </nav>
         </div>
 
@@ -58,19 +58,25 @@
                 </div>
             </section>
 
-            <!-- <section>
-                <div class="wrapperembed">
-                    <div class="embededcontent" id="examples"></div>
+            <section>
+                <div class="wrapper">
+                    <script src="https://gist.github.com/LarsEnno/100681c229dfba94817c2616fd40bbe5.js"></script>
                 </div>
-            </section> -->
+            </section>
 
             <section>
                 <div class="wrapper_fullwidth">
                     <div id="spinner">
-                         <h2>Loading.</h2>
+                        <h2>Loading.</h2>
                     </div>
                     <div id="exploremap"></div>
+                    <!-- <div id="exploremap_pane">
+                        <h1>Explore DIVACoast.jl!</h1>
+                        <p>This maps shows our floodplains and their associated HypsometricProfile around the world.
+                            Click on the map to see the HypsometricProfile of the selected floodplain.</p>
+                    </div> -->
             </section>
+
         </div>
     </main>
 

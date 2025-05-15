@@ -9,8 +9,11 @@ if (!content_loaded) {
 }
 
 function initEmbeds() {
-    buildBlueprint()
-    exploreMap();
+    // Return the AJAX Promise from buildBlueprint
+    return buildBlueprint().then(() => {
+        removeLinkFromDocstringHeader();
+        exploreMap();
+    });
 }
 
 // Execute when DOM is loaded
@@ -18,6 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
     slider(); // Creates and updates the section slider
     // controlMap();
 });
+
+// Remove link from function name in docstring header
+function removeLinkFromDocstringHeader() {
+    const docsEmbed = document.getElementById('embededHTML_docs');
+    docsEmbed.addEventListener('load', () => {
+        const embeddedDoc = docsEmbed.contentDocument || docsEmbed.contentWindow.document;
+        if (embeddedDoc) {
+            // Remove link and pointer events as before
+            const docstringBindings = embeddedDoc.querySelectorAll('.docstring-binding');
+            docstringBindings.forEach(binding => {
+                binding.removeAttribute('href');
+                binding.style.pointerEvents = 'auto'; // Enable pointer events for toggling
+                binding.style.cursor = 'pointer';
+                binding.style.color = 'inherit';
+            });            
+        }
+    });
+}
 
 // Section slider
 function slider() {
@@ -46,10 +67,9 @@ function slider() {
     move_slider();
 }
 
-
 // Embeds from blueprint
 function buildBlueprint() {
-    $.ajax({ url: './blueprint.json', method: 'GET', dataType: 'json' }).done(bp => {
+    return $.ajax({ url: './blueprint.json', method: 'GET', dataType: 'json' }).done(bp => {
 
         Object.keys(bp).forEach(section => {
 
@@ -73,12 +93,13 @@ function buildBlueprint() {
 function addHTMLEmbed(html_path, targetID) {
     return new Promise((resolve, reject) => {
         const target = document.getElementById(targetID);
-        target.innerHTML = '<object type="text/html" data="' + html_path + '" id="embededHTML_docs"></object>'
+        // Add the fade class initially
+        target.innerHTML = `<object type="text/html" data="${html_path}" id="embededHTML_docs" class="embed-fade"></object>`;
         resolve();
     }).then(() => {
-        // apply restyling
         const embededHTML = document.getElementById("embededHTML_docs");
         embededHTML.addEventListener("load", function () {
+            // (Optional) Restyle the embedded document
             const embededHTMLDoc = embededHTML.contentDocument || embededHTML.contentWindow.document;
             if (embededHTMLDoc) {
                 const linkelemt = embededHTMLDoc.createElement('link');
@@ -86,10 +107,19 @@ function addHTMLEmbed(html_path, targetID) {
                 linkelemt.type = 'text/css';
                 linkelemt.href = '../../../styles/documenter_restyle.css';
                 embededHTMLDoc.head.appendChild(linkelemt);
+
+                linkelemt.onload = () => {
+                    embededHTML.classList.add("loaded");
+                };
+                setTimeout(() => {
+                    embededHTML.classList.add("loaded");
+                }, 150);
+            } else {
+                // If no embedded doc, trigger animation anyway
+                embededHTML.classList.add("loaded");
             }
         });
-    }
-    )
+    });
 }
 
 // Explore Map
@@ -120,6 +150,22 @@ function hideSpinner() {
     document.getElementById('spinner').style.display = 'none';
 }
 
+function jumpToFloodplain(id) {
+    let baththubdata = "./data/bathtub.geojson";
+    fetch(baththubdata)
+        .then(response => response.json())
+        .then(data => {
+            geojsonData = data;
+            data.features.filter(feature => { feature.properties.fpid == id }).forEach(feature => {
+                console.log(feature);
+                let [lng, lat] = feature.geometry.coordinates;
+                map.setView([lat, lng], 12); // Set the map view to the selected floodplain
+            });
+        }
+        );
+
+}
+
 function exploreMap() {
 
     showSpinner();
@@ -143,13 +189,18 @@ function exploreMap() {
     });
 
     // Define custom Icon
-    let customIcon = L.icon({
-        iconUrl: "./assets/mapmarker_wave.png",
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
-        popupAnchor: [0, -15]
-    });
+    // let customIcon = L.icon({
+    //     iconUrl: "./assets/mapmarker_wave.png",
+    //     iconSize: [30, 30],
+    //     iconAnchor: [15, 15],
+    //     popupAnchor: [0, -15]
+    // });
 
+    let customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div class="marker-icon"></div>',
+        iconSize: [15, 15]
+    })
 
     let geojsonLayer;
     let geojsonData;
@@ -242,7 +293,7 @@ function renderLineChart(data) {
     });
 
 
-    
+
     // Create the chart
     var lineChart = new Chart(ctx, {
         type: 'line',
